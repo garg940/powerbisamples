@@ -1,0 +1,26 @@
+table bonus
+	lineageTag: acf3dbaf-a161-43a9-acc3-097a0d80e3c0
+
+	measure 'bonus Value' = SELECTEDVALUE('bonus'[Parameter], 5)
+		formatString: 0
+		lineageTag: c5233be3-a9fd-4494-a1e7-9b24ac0381b8
+
+	column Parameter
+		formatString: 0
+		lineageTag: 855685d1-b7ee-411d-9621-3b2059612bfe
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition bonus = calculated
+		mode: import
+		source = GENERATESERIES(1, 10, 10)
+
+	annotation PBI_Id = 2a8da45ac5db447f9d333e0ee24571ff
+

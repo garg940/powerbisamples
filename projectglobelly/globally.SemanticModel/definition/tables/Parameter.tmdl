@@ -1,0 +1,48 @@
+table Parameter
+	lineageTag: 854f0eb9-9fe3-4b1f-b60d-672ea7bbd645
+
+	column Parameter
+		lineageTag: 3a05d1b3-432d-4c10-8d95-2c4a8d99b1eb
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Fields'
+		isHidden
+		lineageTag: 24f70854-213b-4125-a3dc-0dc4956c7f76
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Order'
+		isHidden
+		formatString: 0
+		lineageTag: aa7019a8-e4c8-4ace-8256-2426ac12e6fa
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Parameter = calculated
+		mode: import
+		source =
+				{
+				    ("total sales", NAMEOF('Global Superstore'[total sales]), 0),
+				    ("TOTAL PROFIT", NAMEOF('Global Superstore'[TOTAL PROFIT]), 1)
+				}
+
+	annotation PBI_Id = 45c48563c7e04f3782f9f2f0ca62d83f
+
