@@ -1,0 +1,50 @@
+table 'segments '
+	lineageTag: c975d32f-c6e9-49da-902a-32f1f18c5d0a
+
+	column 'segments '
+		lineageTag: f8ce5090-6f60-4d48-8ad2-75480e36ea03
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'segments  Order'
+
+		relatedColumnDetails
+			groupByColumn: 'segments  Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'segments  Fields'
+		isHidden
+		lineageTag: 67ff35a9-3b4e-4592-b6c2-dcf915a1be5a
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'segments  Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'segments  Order'
+		isHidden
+		formatString: 0
+		lineageTag: 372852b1-c800-4d64-aefd-ee7c0fead636
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'segments ' = calculated
+		mode: import
+		source =
+				{
+				    ("Category", NAMEOF('Global Superstore'[Category]), 0),
+				    ("Country", NAMEOF('Global Superstore'[Country]), 1),
+				    ("Segment", NAMEOF('Global Superstore'[Segment]), 2),
+				    ("Order_Priority", NAMEOF('Global Superstore'[Order_Priority]), 3)
+				}
+
+	annotation PBI_Id = ce34cb749f7b48f78f690d9f04ae13fb
+

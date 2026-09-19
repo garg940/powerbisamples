@@ -1,0 +1,124 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "5a18e8062871cea94e44",
+  "position": {
+    "x": 340.04040404040404,
+    "y": 219.79797979797979,
+    "z": 2000,
+    "height": 490.020202020202,
+    "width": 939.959595959596,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "columnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Global Superstore"
+                    }
+                  },
+                  "Property": "Category"
+                }
+              },
+              "queryRef": "Global Superstore.Category",
+              "nativeQueryRef": "Category",
+              "active": true,
+              "displayName": "Category"
+            }
+          ],
+          "fieldParameters": [
+            {
+              "parameterExpr": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "segments "
+                    }
+                  },
+                  "Property": "segments "
+                }
+              },
+              "index": 0,
+              "length": 1
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Global Superstore"
+                    }
+                  },
+                  "Property": "total sales"
+                }
+              },
+              "queryRef": "Global Superstore.total sales",
+              "nativeQueryRef": "total sales",
+              "displayName": "total sales"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Global Superstore"
+                    }
+                  },
+                  "Property": "TOTAL PROFIT"
+                }
+              },
+              "queryRef": "Global Superstore.TOTAL PROFIT",
+              "nativeQueryRef": "TOTAL PROFIT",
+              "displayName": "TOTAL PROFIT"
+            }
+          ],
+          "fieldParameters": [
+            {
+              "parameterExpr": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Parameter"
+                    }
+                  },
+                  "Property": "Parameter"
+                }
+              },
+              "index": 0,
+              "length": 2
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Global Superstore"
+                  }
+                },
+                "Property": "total sales"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
