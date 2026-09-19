@@ -5,14 +5,32 @@
     "x": 60.663507109004733,
     "y": 78.862559241706151,
     "z": 0,
-    "height": 611.18483412322269,
-    "width": 1157.1563981042652,
+    "height": 391.27962085308053,
+    "width": 840.18957345971558,
     "tabOrder": 0
   },
   "visual": {
     "visualType": "treemap",
     "query": {
       "queryState": {
+        "Details": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Global Superstore"
+                    }
+                  },
+                  "Property": "Customer_ID"
+                }
+              },
+              "queryRef": "Global Superstore.Customer_ID",
+              "nativeQueryRef": "Customer_ID"
+            }
+          ]
+        },
         "Group": {
           "projections": [
             {
