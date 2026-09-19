@@ -1,0 +1,256 @@
+table 'Global Superstore'
+	lineageTag: e7f47a12-f43d-4ea9-95a0-69bdb89ae5f4
+
+	measure 'total sales' = SUM('Global Superstore'[Sales])
+		formatString: 0
+		lineageTag: f92f4581-949c-4607-9481-d99da6049b56
+
+	measure 'TOTAL PROFIT' = SUM('Global Superstore'[Profit])
+		lineageTag: a887d3b8-bcac-441d-b7bf-9be921834c08
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'total sales bonus' = [total sales] * [bonus Value]/100
+		lineageTag: b3ceb1b6-ab42-4666-b279-50d90c84d621
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Category
+		dataType: string
+		lineageTag: cbf84004-56f7-4d3b-9f7b-8ce11d617e4e
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: f74e809a-c58a-4cf6-8767-8191125e5e76
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 3df8260e-a231-46b9-91c8-c2684882c67c
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Customer_ID
+		dataType: string
+		lineageTag: 0308d451-a12d-4d6c-99cb-1fba9be9fa1c
+		summarizeBy: none
+		sourceColumn: Customer_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Customer_Name
+		dataType: string
+		lineageTag: 91ec05aa-0967-4abb-b480-ce85639bb26f
+		summarizeBy: none
+		sourceColumn: Customer_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Discount
+		dataType: int64
+		formatString: 0
+		lineageTag: 5c8ed94e-7356-42e8-a1e8-2c03b179d866
+		summarizeBy: sum
+		sourceColumn: Discount
+
+		annotation SummarizationSetBy = Automatic
+
+	column Market
+		dataType: string
+		lineageTag: 13bd0c1b-5f6a-4942-a5a9-a62b812d4a4b
+		summarizeBy: none
+		sourceColumn: Market
+
+		annotation SummarizationSetBy = Automatic
+
+	column ji_lu_shu
+		dataType: int64
+		formatString: 0
+		lineageTag: 1b361a71-a63d-4c2c-965c-51c8530edae8
+		summarizeBy: sum
+		sourceColumn: ji_lu_shu
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order_Date
+		dataType: string
+		lineageTag: 87572d9e-bc08-404c-a9ab-7598c6720d4d
+		summarizeBy: none
+		sourceColumn: Order_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order_ID
+		dataType: string
+		lineageTag: 4dda2922-c735-4519-a83d-10c205a5b8a2
+		summarizeBy: none
+		sourceColumn: Order_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order_Priority
+		dataType: string
+		lineageTag: e18f64a4-b029-4f8b-b832-6654f92092aa
+		summarizeBy: none
+		sourceColumn: Order_Priority
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product_ID
+		dataType: string
+		lineageTag: 76f26aaf-f6cf-4fd3-bdb5-80ec2f6a4fdb
+		summarizeBy: none
+		sourceColumn: Product_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product_Name
+		dataType: string
+		lineageTag: 18b60487-cef4-4a6c-9f73-f6a6322a1f22
+		summarizeBy: none
+		sourceColumn: Product_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Profit
+		dataType: double
+		lineageTag: 0f2edb65-7445-410c-b3dc-8e7723c782b9
+		summarizeBy: sum
+		sourceColumn: Profit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 8bcba453-d013-49f5-9418-647f75302be8
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: 2deb9a86-56bf-49a5-9a67-6989fc27a394
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column Row_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: ca18be7d-acb2-474d-91d2-0b1e4f76f334
+		summarizeBy: count
+		sourceColumn: Row_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sales
+		dataType: int64
+		formatString: 0
+		lineageTag: 3ad1a853-4ec6-423d-934d-78ff63fa9bef
+		summarizeBy: sum
+		sourceColumn: Sales
+
+		annotation SummarizationSetBy = Automatic
+
+	column Segment
+		dataType: string
+		lineageTag: d0ce4441-c79d-4a01-acf7-f0f236ddd93f
+		summarizeBy: none
+		sourceColumn: Segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ship_Date
+		dataType: string
+		lineageTag: 0b76cba1-4357-494f-be55-f1e4e7eda6d2
+		summarizeBy: none
+		sourceColumn: Ship_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ship_Mode
+		dataType: string
+		lineageTag: f4912f38-940a-4276-88c4-7590a9ddbae9
+		summarizeBy: none
+		sourceColumn: Ship_Mode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Shipping_Cost
+		dataType: double
+		lineageTag: e9fc002d-ce9b-4453-9249-029d2fcc3509
+		summarizeBy: sum
+		sourceColumn: Shipping_Cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column State
+		dataType: string
+		lineageTag: 6c1b26df-8c64-4a4e-a0c2-c1fda2707bfa
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sub_Category
+		dataType: string
+		lineageTag: 2953580a-de8f-466a-8d19-ae35aa74b35f
+		summarizeBy: none
+		sourceColumn: Sub_Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: d243d9a1-a234-4b6b-a7b9-456a28ced811
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Market2
+		dataType: string
+		lineageTag: 6437a173-fb4b-4fd8-956f-79a8718b51a2
+		summarizeBy: none
+		sourceColumn: Market2
+
+		annotation SummarizationSetBy = Automatic
+
+	column weeknum
+		dataType: int64
+		formatString: 0
+		lineageTag: 2c5baa25-2384-47ef-99ee-7600ac12d6ab
+		summarizeBy: sum
+		sourceColumn: weeknum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Global Superstore' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Databases("DESKTOP-2EVQFTL\SQLEXPRESS"),
+				  #"Navigation 1" = Source{[Name = "yash"]}[Data],
+				  #"Navigation 2" = #"Navigation 1"{[Schema = "dbo", Item = "Global Superstore"]}[Data]
+				in
+				  #"Navigation 2"
+
+	annotation PBI_ResultType = Table
+
