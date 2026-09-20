@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Cashflow- Starting Point (1)"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "8d4310f1-6974-4b55-84b8-f402ab17a547"
+  }
+}

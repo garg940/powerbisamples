@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Cashflow- Starting Point (1)"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "3ea9166b-c541-412e-b6af-0ed4abd4e707"
+  }
+}

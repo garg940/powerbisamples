@@ -1,0 +1,210 @@
+table Data
+	lineageTag: b4ef889e-4a12-445c-bb95-5932b85df495
+
+	measure _DeltaPY = ```
+			[_AC]- [_PY]
+			
+			```
+		formatString: 0
+		lineageTag: 7d18a851-6e97-4470-a0fa-bb8b11527eae
+
+	measure _AC =
+			
+			CALCULATE(SUM(Data[Cashflow]), Data[Year] = 2022)
+		formatString: #,0
+		lineageTag: ad2e40e3-0e07-4600-b211-f3d23d91dcb5
+
+	measure _PY =
+			
+			
+			CALCULATE(SUM(Data[Cashflow]), Data[Year] = 2021)
+		formatString: 0
+		lineageTag: 620865fc-2a33-456b-b13a-ae6aa01d750e
+
+	measure _DeltaPY% =
+			
+			DIVIDE([_DeltaPY], [_PY])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: c846bed5-ec0c-43dc-acbe-d48b6f0ad24b
+
+	measure '_delta py bar' = [_DeltaPY]
+		formatString: 0
+		lineageTag: c76fb03b-afcd-4463-8b2e-debef373fde7
+
+	measure '_DeltaPY% SVG' = ```
+			
+			//ΔPY% = (AC - PY) / PY (relative difference between AC and PY)
+			//Returns an SVG image code with ΔPY% pin charts (green - positive, red - negative, black pinheads)
+			//  and a vertical line for Axis Y (ΔPY% = 0)
+			VAR _ColorGrey = "#c6c6c6"
+			VAR _ColorRed = "#ff0000"
+			VAR _ColorGreen = "#008e96"
+			VAR _ColorBlack = "#404040"
+			VAR _Value =
+			    --ΔPY%
+			    IF (
+			        HASONEVALUE ( Data[Description] ),
+			        [_DeltaPY%],
+			        [_Average DeltaPY%]   )
+			VAR _maxValue =
+			    --max value to calculate axis X scale
+			    MAX (
+			        ABS ( MAXX ( ALLSELECTED ( Data ), [_DeltaPY%] ) ),
+			        ABS ( MINX ( ALLSELECTED ( Data ), [_DeltaPY%] ) )
+			    )
+			VAR _WidthValue =
+			    --bar width (numeric value)
+			    DIVIDE ( ABS ( _Value ), _maxValue ) / 2
+			VAR _Width =
+			    --bar width - text for SVG
+			    FORMAT ( _WidthValue, "0.0%" )
+			VAR _barColor =
+			    --green or red
+			    IF ( _Value > 0, _ColorGreen, _ColorRed )
+			VAR _X =
+			    --x position of a bar (pin)
+			    SWITCH (
+			        TRUE (),
+			        _Value >= 0, "50%",
+			        _Value < 0, FORMAT ( 0.5 - _WidthValue, "0.0%" )
+			    )
+			VAR _XPinhead =
+			    --x position of a bar (pinhead)
+			    SWITCH (
+			        TRUE (),
+			        _Value >= 0,
+			            FORMAT ( 0.5 + _WidthValue - 3 / 200, "0.0%" ),
+			        _Value < 0,
+			            FORMAT ( 0.5 - _WidthValue - 3 / 200, "0.0%" )
+			    )
+			VAR _Rank =
+			    --row value rank to ensure correct column sorting
+			    10000
+			        + RANKX ( ALLSELECTED ( Data ), [_DeltaPY%],, ASC )
+			VAR _ViewBoxWidth = 600  -- Adjusted viewBox width for better scaling
+			VAR _SVG =
+			    --SVG code
+			    --header
+			    --comment with Rank text for sorting
+			    --line (axis Y)
+			    --rectangle black pinhead
+			    --rectangle for DeltaPY% (green or red)
+			    --SVG style
+			    "data:image/svg+xml;utf8," & "<svg xmlns=""http://www.w3.org/2000/svg"" viewBox=""0 0 " & _ViewBoxWidth & " 30"">
+			    /*" & _Rank & "*/
+			    <line x1=""50%"" x2=""50%"" y1=""0%"" y2=""100%"" stroke=""" & _ColorGrey & """ stroke-width=""1""></line >
+			    <rect y=""35%"" x=""" & _XPinhead & """ width=""" & "10" & """ height=""30%"" fill=""" & _ColorBlack & """></rect>   
+			    <rect y=""45%"" x=""" & _X & """ width=""" & FORMAT(_WidthValue * 100, "0.0") & "%" & """ height=""10%"" fill=""" & _barColor & """></rect>
+			" & [_SVG Style] & "
+			</svg>"
+			RETURN
+			    _SVG
+			
+			```
+		lineageTag: 56d30799-6f85-48f6-8ea9-af939dda359d
+		dataCategory: ImageUrl
+
+	measure '_Average DeltaPY%' = ```
+			//Average (per sales person) relative differnce between actual period (year) sales and previous period (year) sales: (AC-PY)/PY in %
+			VAR _DeltaTotal =
+			    SUMX ( ALLSELECTED ( Data[Description] ), [_DeltaPY] )
+			VAR _PYTotal =
+			    SUMX ( ALLSELECTED ( Data[Description] ), [_PY] )
+			VAR _Result =
+			     DIVIDE ( _DeltaTotal, _PYTotal ) 
+			RETURN
+			    _Result
+			```
+		lineageTag: 4aa157e0-d23f-4cf4-a79c-05961691dac0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '_SVG Style' =
+			
+			//SVG <style></style> code
+			"<style>
+			    <![CDATA[
+			      text{
+			        font-family: Segoe UI;
+			        font-size: 18px;
+			        alignment-baseline: middle;
+			      }
+			    ]]>
+			  </style>"
+		lineageTag: ed826af8-bf6c-4ed5-931f-86bbbe61111e
+
+	measure _Color =
+			
+			If([_DeltaPY] > 0, "#126F0D", "#A1343C")
+		lineageTag: e6806d17-c09f-43da-aecd-653758eab100
+
+	measure cashfl = SUM(Data[Cashflow])
+		formatString: #,0
+		lineageTag: 04c47c8a-30af-4c1d-b5f4-682ba5846ef8
+
+	column 'Activity Type'
+		dataType: string
+		lineageTag: a350aa40-5345-403b-ba29-a7b65c408307
+		summarizeBy: none
+		sourceColumn: Activity Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: dee4154b-6c55-4433-bdb1-ff5480b20105
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: ebb76011-b115-4d2e-87ad-1dfecf67ae2d
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cashflow
+		dataType: int64
+		formatString: #,0
+		lineageTag: 62085d18-4a98-4b2f-9f43-4cf4e224cd2f
+		summarizeBy: sum
+		sourceColumn: Cashflow
+
+		annotation SummarizationSetBy = Automatic
+
+	column Index
+		dataType: int64
+		formatString: 0
+		lineageTag: bd005a07-e315-4bbf-a600-dce010f1fea7
+		summarizeBy: sum
+		sourceColumn: Index
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type
+		dataType: string
+		lineageTag: b56a0e68-59a9-486b-9045-a1f6b9a50a0b
+		summarizeBy: none
+		sourceColumn: Type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Data = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Injae\OneDrive\Desktop\Cashflow data.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Index", Int64.Type}, {"Type", type text}, {"Activity Type", type text}, {"Description", type text}, {"Year", Int64.Type}, {"Cashflow", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
