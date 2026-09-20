@@ -3,9 +3,9 @@
   "name": "81105c4474154b70a330",
   "position": {
     "x": 0,
-    "y": 168.34123222748815,
+    "y": 103.12796208530806,
     "z": 1000,
-    "height": 552.03791469194312,
+    "height": 617.25118483412314,
     "width": 1046.4454976303316,
     "tabOrder": 1000
   },
@@ -61,6 +61,39 @@
               },
               "queryRef": "Global Superstore.total sales bonus",
               "nativeQueryRef": "total sales bonus"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Global Superstore"
+                    }
+                  },
+                  "Property": "Product_ID"
+                }
+              },
+              "queryRef": "Global Superstore.Product_ID",
+              "nativeQueryRef": "Product_ID"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Global Superstore"
+                        }
+                      },
+                      "Property": "Profit"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Global Superstore.Profit)",
+              "nativeQueryRef": "Sum of Profit"
             }
           ]
         }
@@ -111,6 +144,20 @@
           },
           "selector": {
             "metadata": "Sum(Global Superstore.Sales)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "225.2607120031405D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Global Superstore.total sales bonus"
           }
         }
       ],

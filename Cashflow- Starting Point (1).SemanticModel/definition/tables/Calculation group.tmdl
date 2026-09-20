@@ -1,0 +1,33 @@
+table 'Calculation group'
+	lineageTag: 5734670d-8ed0-49fc-bc48-86109dac9745
+
+	calculationGroup
+
+		calculationItem 'Calculation item' = ```
+				
+				if(
+				    SELECTEDVALUE(Data[Type]) = "Total Cash, Start of Year" &&    
+				    ( ISINSCOPE(Data[Activity Type])  || ISINSCOPE(Data[Description]) ) ,
+				    blank(), 
+				    SELECTEDMEASURE()
+				)
+				```
+
+	column 'Calculation group column'
+		dataType: string
+		lineageTag: a9243dea-2a9a-4786-805c-9d752150b309
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		formatString: 0
+		lineageTag: 56060e65-85ea-4018-857c-61f958430354
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
